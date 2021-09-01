@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('salachat:server');
 var http = require('http');
 
+const connect = require('../utils/db');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -81,7 +83,8 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+async function onListening() {
+  await connect();
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
