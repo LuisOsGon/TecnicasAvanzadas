@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-var UserSchema = new Schema({
+const Schema = mongoose.Schema;
+
+const UserSchema = new Schema({
     idUser: {type: Number, required:true, indexes: true},
     nombre: {type: String, required: true, max: 100},
     apellido: {type: String, required: true, max: 100},
@@ -9,4 +10,6 @@ var UserSchema = new Schema({
     fechaCreacion: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+
+export default User;
