@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-var MensajeSchema = new Schema({
+const Schema = mongoose.Schema;
+
+const MessageSchema = new Schema({
     id: {type: Number, required:true, indexes: true},
     idUser: {type: Number, required:true},
     idSala: {type: Number, required:true},
@@ -10,4 +11,6 @@ var MensajeSchema = new Schema({
     fechaCreacion: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Mensaje', MensajeSchema);
+const Message = mongoose.model('message', MessageSchema);
+
+export default Message;

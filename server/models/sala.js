@@ -1,10 +1,13 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import * as mongoose from "mongoose";
 
-var SalaSchema = new Schema({
+const Schema = mongoose.Schema;
+
+const SalaSchema = new Schema({
     idSala: {type: Number, required:true, indexes: true},
     nombre: {type: String, required: true, max: 100},    
     fechaCreacion: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Sala', SalaSchema);
+const Sala = mongoose.model('Sala', SalaSchema);
+
+export default Sala;
