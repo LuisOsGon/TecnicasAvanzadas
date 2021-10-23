@@ -7,8 +7,10 @@
 var app = require('../app');
 var debug = require('debug')('salachat:server');
 var http = require('http');
+const socketio = require('socket.io');
 
 const connect = require('../utils/db');
+const { cond } = require('lodash');
 
 /**
  * Get port from environment and store in Express.
@@ -90,4 +92,11 @@ async function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+	console.log('Listening on ' + bind)  
 }
+
+// websocket
+const io = socketio(server);
+io.on('connection', () => {
+	console.log('Conectado');
+});
