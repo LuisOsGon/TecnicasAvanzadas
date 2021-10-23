@@ -1,12 +1,14 @@
 import { Router as expressRouter } from "express";
 import PingController from "../controllers/ping";
-// import UserController from "../controllers/user.js";
+import AuthController from "../controllers/auth";
 
 const router = expressRouter();
 
 router.get("/ping", PingController.index);
 
-// router.get("/user", UserController.index);
+router.post("/login", AuthController.login);
+router.post("/logout", AuthController.logout);
+router.post("/register", AuthController.register);
 
 router.use("*", (req, res) => res.status(404).json());
 
