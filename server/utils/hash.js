@@ -1,7 +1,13 @@
 import bcrypt from "bcryptjs";
 
-const hash = (string) => {
-    return bcrypt.hashSync(string, process.env.BCRYPT_SALT);
+class Hash {
+  static async make(password) {
+    return await bcrypt.hash(password, process.env.BCRYPT_SALT);
+  }
+
+  static async compare(password, hash) {
+    return await bcrypt.compare(password, hash);
+  }
 }
 
-export default hash;
+export default Hash;

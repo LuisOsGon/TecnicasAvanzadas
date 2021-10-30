@@ -1,34 +1,46 @@
-import hash from "../utils/hash";
 import User from "../models/user";
+import JsonWebToken from '../utils/jwt';
 
 class AuthController {
     static async login(req, res) {
-        const { email, password } = req.body;
+      const { email, password } = req.body;
 
-        const user = await User.findOne({ email, password: hash(password)});
+      const user = await User.findOne({ email});
 
-        if (!user) {
-            return res.status(401).json();
-        }
+      if (!user || !user.validatePassword(password)) {
+          return res.status(401).json({ message: 'Credenciales inválidas' });
+      }
 
-        // TODO: Auth
+      const token = JsonWebToken.sign({ id: user._id });
 
-        return res.status(200).json();
+      return res.status(200).json({ token });
     }
 
     static async register(req, res) {
         const { email, password } = req.body;
 
-        const user = new User({ email, password: hash(password)});
-        await user.save();
+        try {
+          console.log('**************************************************************************\n\n\n')
+          console.log(email, password)
+          console.log('\n\n\n**************************************************************************')
+            const user = await User.create({ email, password });
+            console.log('**************************************************************************\n\n\n')
+            console.log(user)
+            console.log('\n\n\n**************************************************************************')
+            const token = JsonWebToken.sign({ id: user._id });
 
-        // TODO: Auth
-
-        return res.status(201).json(user);
+            return res.status(201).json({token});
+        } catch (error) {
+          console.log('**************************************************************************\n\n\n')
+          console.log(error)
+          console.log('\n\n\n**************************************************************************')
+            return res.status(400).json({ message: 'Usuario ya existe' });
+        }
     }
 
     static async logout(req, res) {
-        // TODO: Logout
+      JsonWebToken.destroy(req.headers.authorization);
+      return res.status(204).json();
     }
 }
 

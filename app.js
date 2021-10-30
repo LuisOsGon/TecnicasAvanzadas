@@ -17,6 +17,7 @@ const startApp = async () => {
   await connectDB(process.env.DB_URL);
 
   app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   app.use("/api", api);
   app.use("*", express.static(path.join(__dirname, 'web/public')));
