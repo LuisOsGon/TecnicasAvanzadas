@@ -1,3 +1,4 @@
+import User from '../models/user';
 import JsonWebToken from "../utils/jwt";
 
 async function authenticated(req, res, next) {
@@ -8,8 +9,24 @@ async function authenticated(req, res, next) {
   }
 
   const [, token] = req.headers.authorization.split(' ');
-  const { _id } = await JsonWebToken.verify(token);
-  req.id = _id;
+  const { id } = await JsonWebToken.verify(token);
+
+  if (!id) {
+    return res.status(401).json({
+      message: 'Unauthorized'
+    });
+  }
+
+  req.user = await User.findById(id);
+
+  if (!req.user) {
+    return res.status(401).json({
+      message: 'Unauthorized'
+    });
+  }
+  console.log('**************************************************************************\n\n\n')
+  console.log(req.user)
+  console.log('\n\n\n**************************************************************************')
   next();
 }
 

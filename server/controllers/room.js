@@ -1,8 +1,9 @@
+import User from '../models/user';
 import Room from '../models/room';
 
 class RoomController {
   static async list(req, res) {
-    const rooms = await Room.find({ members: req.id });
+    const rooms = await Room.find({ members: req.user._id });
 
     return res.status(200).json({rooms});
   }
@@ -14,7 +15,7 @@ class RoomController {
       return res.status(404).json({ message: 'Room not found' });
     }
 
-    if (!room.members.includes(req.id)) {
+    if (!room.members.includes(req.user._id)) {
       return res.status(409).json({
         message: 'You are not in this room',
       });
@@ -27,7 +28,7 @@ class RoomController {
     const room = await Room.create({
       name: req.body.name,
       description: req.body.description,
-      members: [req.id],
+      members: [req.user._id],
     });
 
     return res.status(201).json({room});
@@ -42,13 +43,13 @@ class RoomController {
       });
     }
 
-    if (room.members.includes(req.id)) {
+    if (room.members.includes(req.user._id)) {
       return res.status(409).json({
         message: 'You are already in this room',
       });
     }
 
-    room.members.push(req.id);
+    room.members.push(req.user._id);
     await room.save();
 
     return res.status(200).json({
@@ -65,13 +66,13 @@ class RoomController {
       });
     }
 
-    if (!room.members.includes(req.id)) {
+    if (!room.members.includes(req.user._id)) {
       return res.status(409).json({
         message: 'You are not in this room',
       });
     }
 
-    room.members.pull(req.id);
+    room.members.pull(req.user._id);
     await room.save();
 
     return res.status(200).json({

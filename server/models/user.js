@@ -10,10 +10,6 @@ const UserSchema = new Schema({
     created_at: { type: Date, default: Date.now },
 });
 
-UserSchema.methods.validPassword = function(password) {
-    return Hash.compare(password, this.password);
-};
-
 const User = mongoose.model('User', UserSchema);
 
 export default User;

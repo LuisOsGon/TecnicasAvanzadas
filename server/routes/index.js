@@ -1,10 +1,11 @@
 import { Router as expressRouter } from "express";
 
 import guest from "../middlewares/guest";
+import authenticated from "../middlewares/authenticated";
 import PingController from "../controllers/ping";
 import AuthController from "../controllers/auth";
 import RoomController from "../controllers/room";
-import authenticated from "../middlewares/authenticated";
+import UserController from "../controllers/user";
 
 const router = expressRouter();
 
@@ -12,6 +13,8 @@ router.get("/ping", PingController.index);
 
 router.post("/login", guest, AuthController.login);
 router.post("/register", guest, AuthController.register);
+
+router.get("/user", authenticated, UserController.show);
 
 router.get("/rooms", authenticated, RoomController.list);
 router.post("/rooms", authenticated, RoomController.create);
