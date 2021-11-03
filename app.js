@@ -22,9 +22,21 @@ const startApp = async () => {
   app.use("/api", api);
   app.use("*", express.static(path.join(__dirname, 'web/public')));
 
-  io.on("connection", socket => {
-    console.log("Usuario conectado");
-  })
+  io.on("connection", (socket) => {
+    console.log("Usuario conectado", socket.id);
+    socket.on('mensaje', (data) => {
+        console.log(data);
+        io.sockets.emit('mensaje', data);
+    });
+    socket.on('typing', (data) => {
+        console.log(data);
+        socket.broadcast.emit('typing', data);
+    })
+  });
+
+  io.on('disconnect', (socket) => {
+    console.log('a user disconnected');
+  });
 
   server.listen(PORT, () => {
     console.log(`Servidor ejecutandose en http://localhost:${PORT}`);

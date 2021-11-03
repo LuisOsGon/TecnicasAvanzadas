@@ -3,6 +3,17 @@
 <head></head>
 <body>
     <h1>Técnicas Avanzadas de Programación</h1>
+        <div id="chat-container">
+            <div id="chat-window">
+                <div id="salida"></div>
+                <div id="actions"></div>
+            </div>
+            <input type="text" id="user" placeholder="UserName">
+            <input type="text" id="sala" placeholder="Sala">
+            <input type="text" id="mensaje" placeholder="Mensaje">
+            <button id="enviar">Enviar</button>
+        </div>
+        <script src="/socket.io/socket.io.js" charset="utf-8"></script>
     <div id="root"></div>
 </body>
 </html>

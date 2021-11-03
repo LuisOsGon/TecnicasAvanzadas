@@ -7,7 +7,7 @@
     "dev": "nodemon index.js",
     "start-web": "react-scripts start",
     "build-web": "react-scripts build",
-    "test-web": "react-scripts test",
+    "test-web": "react-scripts test"
   },
   "dependencies": {
     "axios": "^0.23.0",
