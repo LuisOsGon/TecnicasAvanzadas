@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node index.js",
-    "dev": "npm-run-all --parallel dev-server dev-web",
-    "dev-server": "nodemon index.js",
-    "dev-web": "cd web && npm run start"
+    "dev": "nodemon index.js",
+    "start-web": "react-scripts start",
+    "build-web": "react-scripts build",
+    "test-web": "react-scripts test"
   },
   "dependencies": {
     "axios": "^0.23.0",
