@@ -1,48 +1,41 @@
-import {useState, createContext, useEffect, useContext} from 'react';
+import { useState, createContext, useEffect, useContext, useMemo } from "react";
 import AuthService from "../services/auth";
 
 const AuthContext = createContext();
+const { Provider, Consumer } = AuthContext;
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = () => {
+  const login = () => {};
 
-  };
+  const logout = () => {};
 
-  const logout = () => {
-
-  };
-
-  const isAuthenticated = user !== null;
+  const isAuthenticated = useMemo(() => user !== null, [user]);
 
   useEffect(() => {
     async function fetchUser(token) {
-      const {user} = await AuthService.fetchUser(token);
+      const { user } = await AuthService.fetchUser(token);
+
       setUser(user);
     }
 
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
 
     if (token) {
       fetchUser(token);
     }
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <Provider value={{ isAuthenticated, user, login, logout }}>{children}</Provider>;
 }
 
 function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within a AuthProvider');
+    throw new Error("useAuth must be used within a AuthProvider");
   }
   return context;
 }
 
-export { AuthProvider, useAuth };
-
+export { AuthProvider, Consumer as AuthConsumer, useAuth };

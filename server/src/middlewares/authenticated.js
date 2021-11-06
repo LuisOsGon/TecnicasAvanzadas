@@ -24,9 +24,7 @@ async function authenticated(req, res, next) {
       message: 'Unauthorized'
     });
   }
-  console.log('**************************************************************************\n\n\n')
-  console.log(req.user)
-  console.log('\n\n\n**************************************************************************')
+
   next();
 }
 
