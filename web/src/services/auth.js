@@ -1,18 +1,23 @@
-import RestClient from './client';
+import RestClient from "./client";
 
 const client = new RestClient({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: "http://localhost:8000/api"
 });
 
 class AuthService {
   static async fetchUser(token) {
-    const response = await client.get('/user', {
+    return await client.get("/user", {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     });
+  }
 
-    return response.data;
+  static async login({ email, password }) {
+    return await client.post("/login", {
+      email,
+      password
+    });
   }
 }
 

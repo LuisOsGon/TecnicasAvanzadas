@@ -8,24 +8,31 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const login = () => {};
+  async function fetchUser(token) {
+    const {
+      data: { user }
+    } = await AuthService.fetchUser(token);
 
-  const logout = () => {};
+    setUser(user);
+  }
+
+  const login = async (token) => {
+    localStorage.setItem("jwt", token);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("jwt");
+    setUser(null);
+  };
 
   const isAuthenticated = useMemo(() => user !== null, [user]);
 
   useEffect(() => {
-    async function fetchUser(token) {
-      const { user } = await AuthService.fetchUser(token);
-
-      setUser(user);
-      setLoading(false);
-    }
-
     const token = localStorage.getItem("jwt");
 
     if (token) {
       fetchUser(token);
+      setLoading(false);
     } else {
       setLoading(false);
     }

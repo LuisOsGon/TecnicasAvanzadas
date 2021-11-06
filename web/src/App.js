@@ -12,9 +12,7 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div className="App">{isAuthenticated ? <LoggedIn /> : <LoggedOut />}</div>
-  );
+  return isAuthenticated ? <LoggedIn /> : <LoggedOut />;
 }
 
 export default App;
