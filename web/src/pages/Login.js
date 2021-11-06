@@ -17,8 +17,13 @@ function Login() {
   const onSubmit = async ({ email, password }) => {
     setError(null);
     setLoading(true);
+
     try {
-      const response = await AuthService.login({ email, password });
+      const {
+        data: { token }
+      } = await AuthService.login({ email, password });
+
+      login(token);
     } catch (err) {
       if (err?.response?.data?.message) {
         setError(err.response.data.message);

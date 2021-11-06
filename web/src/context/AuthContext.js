@@ -18,6 +18,8 @@ function AuthProvider({ children }) {
 
   const login = async (token) => {
     localStorage.setItem("jwt", token);
+
+    fetchUser(token);
   };
 
   const logout = () => {

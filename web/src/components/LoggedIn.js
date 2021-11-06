@@ -5,7 +5,7 @@ import Navigation from "./Navigation";
 
 function LoggedIn() {
   return (
-    <div class="App">
+    <div className="App">
       <Navigation />
       <Routes>
         <Route path="/" exact element={<h1>Login</h1>} />
