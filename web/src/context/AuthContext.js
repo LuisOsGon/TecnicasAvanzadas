@@ -14,11 +14,12 @@ function AuthProvider({ children }) {
     } = await AuthService.fetchUser(token);
 
     setUser(user);
+    setLoading(false);
   }
 
   const login = async (token) => {
+    setLoading(true);
     localStorage.setItem("jwt", token);
-
     fetchUser(token);
   };
 
@@ -34,7 +35,6 @@ function AuthProvider({ children }) {
 
     if (token) {
       fetchUser(token);
-      setLoading(false);
     } else {
       setLoading(false);
     }
