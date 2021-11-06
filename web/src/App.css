@@ -54,3 +54,35 @@ body {
   font-size: 80%;
   color: white;
 }
+
+.ChannelNav a {
+  font-size: 90%;
+  padding: 8px 20px;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+}
+
+.ChannelNav a.active {
+  background: hsl(30, 50%, 50%);
+}
+
+.Channel {
+  flex: 1;
+  display: flex;
+}
+
+.ChannelMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ChannelInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-bottom: solid 1px #ccc;
+}

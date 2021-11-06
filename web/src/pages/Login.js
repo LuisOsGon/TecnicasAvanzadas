@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import AuthService from "../services/auth";
 
@@ -34,7 +35,8 @@ function Login() {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Ingresar</h1>
+      <Link to="/register">Registrarse</Link>
       {error ? <div style={{ color: "red" }}>{error}</div> : null}
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
@@ -42,8 +44,10 @@ function Login() {
           className="input"
           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
-        {errors.email?.type === "required" && <span>Campo obligatorio</span>}
-        {errors.email?.type === "pattern" && <span>Email inválido</span>}
+        <p>
+          {errors.email?.type === "required" && <span>Campo obligatorio</span>}
+        </p>
+        <p>{errors.email?.type === "pattern" && <span>Email inválido</span>}</p>
 
         <label>Contraseña</label>
         <input
@@ -51,7 +55,11 @@ function Login() {
           type="password"
           {...register("password", { required: true })}
         />
-        {errors.password?.type === "required" && <span>Campo obligatorio</span>}
+        <p>
+          {errors.password?.type === "required" && (
+            <span>Campo obligatorio</span>
+          )}
+        </p>
 
         <input type="submit" />
       </form>

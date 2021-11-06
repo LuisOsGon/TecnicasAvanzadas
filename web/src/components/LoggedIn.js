@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Channel from "../pages/Channel";
 
 import Navigation from "./Navigation";
 
@@ -7,10 +8,12 @@ function LoggedIn() {
   return (
     <div className="App">
       <Navigation />
-      <Routes>
-        <Route path="/" exact element={<h1>Login</h1>} />
-        <Route path="/register" exact element={<h1>register</h1>} />
-      </Routes>
+      <Switch>
+        <Route path="/chat">
+          <Channel />
+        </Route>
+        <Route path="/" exact render={() => <Redirect to="/chat" />} />
+      </Switch>
     </div>
   );
 }
