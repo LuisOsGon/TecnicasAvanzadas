@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
 function Login() {
-  return (<>hola</>);
+  return <>hola</>;
 }
 
 export default Login;

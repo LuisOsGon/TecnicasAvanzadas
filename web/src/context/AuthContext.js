@@ -6,6 +6,7 @@ const { Provider, Consumer } = AuthContext;
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const login = () => {};
 
@@ -18,16 +19,23 @@ function AuthProvider({ children }) {
       const { user } = await AuthService.fetchUser(token);
 
       setUser(user);
+      setLoading(false);
     }
 
     const token = localStorage.getItem("jwt");
 
     if (token) {
       fetchUser(token);
+    } else {
+      setLoading(false);
     }
   }, []);
 
-  return <Provider value={{ isAuthenticated, user, login, logout }}>{children}</Provider>;
+  return (
+    <Provider value={{ isAuthenticated, user, loading, login, logout }}>
+      {children}
+    </Provider>
+  );
 }
 
 function useAuth() {
