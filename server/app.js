@@ -1,10 +1,10 @@
-import path from "path";
 import http from "http";
+import cors from "cors";
 import express from "express";
 import { Server } from "socket.io";
 
-import api from "./server/routes";
-import connectDB from "./server/utils/db";
+import api from "./src/routes";
+import connectDB from "./src/utils/db";
 
 const PORT = process.env.PORT || 8000;
 
@@ -18,9 +18,9 @@ const startApp = async () => {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(cors());
 
   app.use("/api", api);
-  app.use("*", express.static(path.join(__dirname, 'web/public')));
 
   io.on("connection", (socket) => {
     console.log("Usuario conectado", socket.id);
