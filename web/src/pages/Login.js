@@ -17,7 +17,7 @@ function Login() {
   const onSubmit = async ({ email, password }) => {
     setError(null);
     setLoading(true);
-
+		
     try {
       const {
         data: { token }
@@ -33,28 +33,34 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {error ? <div style={{ color: "red" }}>{error}</div> : null}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Email</label>
-        <input
-          className="input"
-          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-        />
-        {errors.email?.type === "required" && <span>Campo obligatorio</span>}
-        {errors.email?.type === "pattern" && <span>Email inválido</span>}
+    <div className="contenedor-div">
+			<div>
+				<h1>Bienvenido a Chat.IO !!!</h1>	
+			</div>
+			<div>
+				<h1>Inicio de sesión</h1>
+				{error ? <div style={{ color: "red" }}>{error}</div> : null}
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<div className="col-md-3"></div>
+					<label className="label-class">Email</label>
+					<input
+						className="input redondeadonorelieve"
+						{...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+					/>
+					{errors.email?.type === "required" && <span>Campo obligatorio</span>}
+					{errors.email?.type === "pattern" && <span>Email inválido</span>}
 
-        <label>Contraseña</label>
-        <input
-          className="input"
-          type="password"
-          {...register("password", { required: true })}
-        />
-        {errors.password?.type === "required" && <span>Campo obligatorio</span>}
+					<label className="label-class">Contraseña</label>
+					<input
+						className="input redondeadonorelieve"
+						type="password"
+						{...register("password", { required: true })}
+					/>
+					{errors.password?.type === "required" && <span>Campo obligatorio</span>}
 
-        <input type="submit" />
-      </form>
+					<input className="btn-class" type="submit" />
+				</form>
+			</div>      
     </div>
   );
 }

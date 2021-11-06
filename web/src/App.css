@@ -54,3 +54,50 @@ body {
   font-size: 80%;
   color: white;
 }
+
+.sinbordefondo {
+  background-color: #eee;
+  border: 0;
+}
+
+.outlinenone {
+	outline: none;
+	background-color: #dfe;
+	border: 0;
+}
+
+.redondeadonorelieve {
+	background-color: #eee;
+	border-radius: 5px;
+	border: 1px solid #39c;
+	border-radius: 10px;
+	margin-right: 10px;
+	height: 20px;
+}
+
+.label-class {
+	margin-right: 10px;
+	font-size: 20px;
+  font-style: italic;
+  font-family: cursive;
+}
+
+.contenedor-div {
+	text-align: center;
+	margin-top: 100px;
+}
+
+.contenedor-titulo-div {
+	text-align: center;
+	margin-top: 100px;
+}
+
+.btn-class {
+	font-size: 13px;
+  font-style: italic;
+  font-family: cursive;
+	height: 25px;
+  width: 80px;
+  background-color: gold;
+	border-radius: 10px;
+}
