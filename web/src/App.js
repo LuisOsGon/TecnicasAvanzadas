@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useAuth } from "./context/AuthContext";
 import LoggedOut from "./components/LoggedOut";
-import LoggedIn from "./components/LoggedIn";
+import AuthenticatedRoutes from "./components/AuthenticatedRoutes";
 
 import "./App.css";
 
@@ -12,7 +12,7 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? <LoggedIn /> : <LoggedOut />;
+  return isAuthenticated ? <AuthenticatedRoutes /> : <LoggedOut />;
 }
 
 export default App;

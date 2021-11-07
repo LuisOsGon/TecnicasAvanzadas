@@ -1,21 +1,20 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Channel from "../pages/Channel";
+import Room from "../pages/Room";
 
 import Navigation from "./Navigation";
 
-function LoggedIn() {
+function AuthenticatedRoutes() {
   return (
     <div className="App">
       <Navigation />
       <Switch>
-        <Route path="/chat">
-          <Channel />
+        <Route path="/room/:roomId">
+          <Room />
         </Route>
-        <Route path="/" exact render={() => <Redirect to="/chat" />} />
       </Switch>
     </div>
   );
 }
 
-export default LoggedIn;
+export default AuthenticatedRoutes;

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Collection } from 'mongoose';
 
 const Schema = mongoose.Schema;
 
