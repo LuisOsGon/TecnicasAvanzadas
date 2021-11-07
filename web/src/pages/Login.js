@@ -34,14 +34,14 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="contenedor-div">
       <h1>Ingresar</h1>
       <Link to="/register">Registrarse</Link>
       {error ? <div style={{ color: "red" }}>{error}</div> : null}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Email</label>
+        <label className="label-class">Email</label>
         <input
-          className="input"
+          className="input redondeadonorelieve"
           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
         />
         <p>
@@ -49,9 +49,9 @@ function Login() {
         </p>
         <p>{errors.email?.type === "pattern" && <span>Email inválido</span>}</p>
 
-        <label>Contraseña</label>
+        <label className="label-class">Contraseña</label>
         <input
-          className="input"
+          className="input redondeadonorelieve"
           type="password"
           {...register("password", { required: true })}
         />
@@ -61,7 +61,7 @@ function Login() {
           )}
         </p>
 
-        <input type="submit" />
+        <input type="submit" className="btn-class"/>
       </form>
     </div>
   );

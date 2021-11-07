@@ -270,3 +270,14 @@ body {
   background-color: gold;
   border-radius: 10px;
 }
+
+a:hover {
+  border-bottom: 1px solid;
+  background: #CDFEAA;
+}
+
+a {
+	font-size: 17px;
+  font-style: italic;
+  font-family: cursive;
+}
