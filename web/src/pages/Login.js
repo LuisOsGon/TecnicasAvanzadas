@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import AuthService from "../services/auth";
 
@@ -17,7 +18,7 @@ function Login() {
   const onSubmit = async ({ email, password }) => {
     setError(null);
     setLoading(true);
-		
+
     try {
       const {
         data: { token }
@@ -33,34 +34,35 @@ function Login() {
   };
 
   return (
-    <div className="contenedor-div">
-			<div>
-				<h1>Bienvenido a Chat.IO !!!</h1>	
-			</div>
-			<div>
-				<h1>Inicio de sesión</h1>
-				{error ? <div style={{ color: "red" }}>{error}</div> : null}
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="col-md-3"></div>
-					<label className="label-class">Email</label>
-					<input
-						className="input redondeadonorelieve"
-						{...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-					/>
-					{errors.email?.type === "required" && <span>Campo obligatorio</span>}
-					{errors.email?.type === "pattern" && <span>Email inválido</span>}
+    <div>
+      <h1>Ingresar</h1>
+      <Link to="/register">Registrarse</Link>
+      {error ? <div style={{ color: "red" }}>{error}</div> : null}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>Email</label>
+        <input
+          className="input"
+          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+        />
+        <p>
+          {errors.email?.type === "required" && <span>Campo obligatorio</span>}
+        </p>
+        <p>{errors.email?.type === "pattern" && <span>Email inválido</span>}</p>
 
-					<label className="label-class">Contraseña</label>
-					<input
-						className="input redondeadonorelieve"
-						type="password"
-						{...register("password", { required: true })}
-					/>
-					{errors.password?.type === "required" && <span>Campo obligatorio</span>}
+        <label>Contraseña</label>
+        <input
+          className="input"
+          type="password"
+          {...register("password", { required: true })}
+        />
+        <p>
+          {errors.password?.type === "required" && (
+            <span>Campo obligatorio</span>
+          )}
+        </p>
 
-					<input className="btn-class" type="submit" />
-				</form>
-			</div>      
+        <input type="submit" />
+      </form>
     </div>
   );
 }

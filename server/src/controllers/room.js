@@ -1,4 +1,3 @@
-import User from '../models/user';
 import Room from '../models/room';
 
 class RoomController {

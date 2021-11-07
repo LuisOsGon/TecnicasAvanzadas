@@ -1,6 +1,6 @@
-import {Route, Redirect} from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
-import {useAuth} from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 function PrivateRoute({ children, ...rest }) {
   const { isAuthenticated } = useAuth();

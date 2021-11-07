@@ -19,6 +19,13 @@ class AuthService {
       password
     });
   }
+
+  static async register({ email, password }) {
+    return await client.post("/register", {
+      email,
+      password
+    });
+  }
 }
 
 export default AuthService;
