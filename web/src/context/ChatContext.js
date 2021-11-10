@@ -2,12 +2,16 @@ import { useState, createContext, useEffect, useContext, useRef } from "react";
 import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 
+import RoomsService from "../services/rooms";
+
 const ChatContext = createContext();
 const { Provider, Consumer } = ChatContext;
 
 function ChatProvider({ children }) {
   const { roomId } = useParams();
   const [connected, setConnected] = useState(false);
+  const [rooms, setRooms] = useState([]);
+
   const socket = useRef();
 
   const connectToRoom = () => {
@@ -20,13 +24,30 @@ function ChatProvider({ children }) {
     });
   };
 
+  const fetchRooms = () => {
+    RoomsService.fetchRooms()
+      .then((response) => {
+        const { rooms } = response.data;
+        setRooms(rooms);
+      })
+      .catch((err) => console.warn(err));
+  };
+
   useEffect(() => {
+    fetchRooms();
     connectToRoom();
   }, []);
 
   return (
     <Provider
-      value={{ roomId, connectToRoom, connected, socket: socket.current }}
+      value={{
+        rooms,
+        fetchRooms,
+        roomId,
+        connectToRoom,
+        connected,
+        socket: socket.current
+      }}
     >
       {children}
     </Provider>

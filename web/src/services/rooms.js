@@ -28,6 +28,14 @@ class RoomsService {
       }
     });
   }
+
+  static async createRoom(room) {
+    return await client.post("/rooms", room, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      }
+    });
+  }
 }
 
 export default RoomsService;

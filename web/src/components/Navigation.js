@@ -1,21 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { useChat } from "../context/ChatContext";
 import { useAuth } from "../context/AuthContext";
-import RoomsService from "../services/rooms";
 
 function Navigation() {
   const { user, logout } = useAuth();
-
-  const [rooms, setRooms] = React.useState([]);
-
-  useEffect(() => {
-    RoomsService.fetchRooms()
-      .then((response) => {
-        const { rooms } = response.data;
-        setRooms(rooms);
-      })
-      .catch((err) => console.warn(err));
-  }, []);
+  const { rooms } = useChat();
 
   return (
     <div className="Nav">

@@ -5,16 +5,16 @@ class RestClient {
     this.restClient = axios.create(config);
   }
 
-  sendRequest(method, endpoint, config) {
-    return this.restClient[method](endpoint, config);
+  sendRequest(method, endpoint, config, headers = {}) {
+    return this.restClient[method](endpoint, config, headers);
   }
 
   get(endpoint, config = {}) {
     return this.sendRequest("get", endpoint, config);
   }
 
-  post(endpoint, config = {}) {
-    return this.sendRequest("post", endpoint, config);
+  post(endpoint, config = {}, headers = {}) {
+    return this.sendRequest("post", endpoint, config, headers);
   }
 
   put(endpoint, config = {}) {
@@ -30,4 +30,4 @@ class RestClient {
   }
 }
 
-export default RestClient
+export default RestClient;
