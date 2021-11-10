@@ -20,6 +20,14 @@ class RoomsService {
       }
     });
   }
+
+  static async fetchMessages(id) {
+    return await client.get(`/rooms/${id}/messages`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      }
+    });
+  }
 }
 
 export default RoomsService;

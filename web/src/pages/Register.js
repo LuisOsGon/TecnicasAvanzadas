@@ -14,13 +14,13 @@ function Register() {
     formState: { errors }
   } = useForm();
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = async ({ email, username, password }) => {
     setError(null);
 
     try {
       const {
         data: { token }
-      } = await AuthService.register({ email, password });
+      } = await AuthService.register({ email, username, password });
 
       login(token);
     } catch (err) {
@@ -46,6 +46,15 @@ function Register() {
         </p>
         <p>{errors.email?.type === "pattern" && <span>Email inválido</span>}</p>
 
+        <label className="label-class">Nombre de Usuario</label>
+        <input
+          className="input redondeadonorelieve"
+          {...register("username", { required: true })}
+        />
+        <p>
+          {errors.email?.type === "required" && <span>Campo obligatorio</span>}
+        </p>
+
         <label className="label-class">Contraseña</label>
         <input
           className="input redondeadonorelieve"
@@ -58,7 +67,7 @@ function Register() {
           )}
         </p>
 
-        <input type="submit" className="btn-class"/>
+        <input type="submit" className="btn-class" />
       </form>
     </div>
   );

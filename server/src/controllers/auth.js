@@ -18,10 +18,10 @@ class AuthController {
     }
 
     static async register(req, res) {
-        const { email, password } = req.body;
+        const { email, username, password } = req.body;
 
         try {
-          const user = await User.create({ email, password: await Hash.make(password) });
+          const user = await User.create({ email, username, password: await Hash.make(password) });
 
           const token = await JsonWebToken.sign({ id: user._id });
 

@@ -21,6 +21,7 @@ router.post("/rooms", authenticated, RoomController.create);
 router.get("/rooms/:roomId", authenticated, RoomController.show);
 router.post("/rooms/:roomId/join", authenticated, RoomController.joinRoom);
 router.post("/rooms/:roomId/leave", authenticated, RoomController.leaveRoom);
+router.get("/rooms/:roomId/messages", authenticated, RoomController.messages);
 
 router.use("*", (req, res) => res.status(404).json());
 

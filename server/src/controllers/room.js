@@ -1,4 +1,5 @@
 import Room from '../models/room';
+import Message from '../models/message';
 
 class RoomController {
   static async list(req, res) {
@@ -77,6 +78,28 @@ class RoomController {
     return res.status(200).json({
       message: 'You have left the room',
     });
+  }
+
+  static async messages(req, res) {
+    const room = await Room.findById(req.params.roomId)
+
+    if (!room) {
+      return res.status(404).json({
+        message: 'Room not found',
+      });
+    }
+
+    if (!room.members.includes(req.user._id)) {
+      return res.status(409).json({
+        message: 'You are not in this room',
+      });
+    }
+
+    const messages = await Message.find({ room_id: req.params.roomId })
+                                  .populate('user_id')
+                                  .sort({ createdAt: -1 });
+
+    return res.status(200).json({messages});
   }
 }
 

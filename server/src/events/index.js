@@ -2,24 +2,24 @@ import User from '../models/user';
 import Message from '../models/message';
 
 function WebSocketEvents(socket) {
-  console.log('**************************************************************************\n\n\n')
-  console.log(socket)
-  console.log('\n\n\n**************************************************************************')
-  console.log("Usuario conectado", socket.id);
+  try {
+    console.log("Usuario conectado", socket.id);
 
-  socket.on('message', async (data) => {
-    const message = await Message.create({
-      content: data.content,
-      user_id: data.user_id,
-      room_id: data.room_id
+    socket.on('message', async (data) => {
+      const message = await Message.create({
+        content: data.content,
+        user_id: data.user_id,
+        room_id: data.room_id
+      });
+
+      await Message.populate(message, { path: 'user_id', model: User });
+
+      socket.emit('message', message);
+      socket.broadcast.emit('message', message);
     });
-    socket.emit('message', message);
-    socket.broadcast.emit('message', message);
-  });
-  socket.on('typing', (data) => {
-      console.log(data);
-      socket.broadcast.emit('typing', data);
-  })
+  } catch (error) {
+    console.warn(error);
+  }
 }
 
 export default WebSocketEvents;
