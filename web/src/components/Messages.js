@@ -40,11 +40,14 @@ function Messages({ roomId }) {
         {messages.length > 0 &&
           messages.map((message) => (
             <div key={message._id} className="Message with-avatar">
-              <div className="Avatar" />
+              {/* <div className="Avatar" /> */}
               <div className="Author">
                 <div>
-                  <span className="UserName">{message.username}</span>
+                  <span className="UserName">
+                    {message.user_id.username ?? "Anónimo"}
+                  </span>
                   <span className="TimeStamp">
+                    {" "}
                     {new Date(message.created_at).toLocaleTimeString()}
                   </span>
                 </div>
