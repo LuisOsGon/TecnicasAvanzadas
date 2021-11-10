@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import { useAuth } from "../context/AuthContext";
 import { useChat } from "../context/ChatContext";
 
 function Messages({ roomId }) {
   const { socket } = useChat();
   const [messages, setMessages] = React.useState([]);
   const scrollRef = useRef();
+  const { user } = useAuth();
 
   useEffect(() => {
     socket.on("message", (message) => {
@@ -19,7 +21,7 @@ function Messages({ roomId }) {
 
   return (
     <div ref={scrollRef} className="Messages">
-      <div className="EndOfMessages">Todos los mensajes leídos</div>
+      <div className="EndOfMessages"><strong>Todos los mensajes leídos</strong></div>
       <div>
         <div className="Day">
           <div className="DayLine" />
@@ -31,7 +33,7 @@ function Messages({ roomId }) {
             <div className="Avatar" />
             <div className="Author">
               <div>
-                <span className="UserName">Fede </span>
+                <span className="UserName">{ user.email }</span>
                 <span className="TimeStamp">
                   {new Date(message.created_at).toLocaleTimeString()}
                 </span>

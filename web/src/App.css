@@ -184,9 +184,11 @@ body {
 }
 
 .Members {
+  background: #454545;
   padding: 20px;
   border-left: solid 1px #ccc;
   width: 150px;
+	color: #fff;
 }
 
 .Member {
