@@ -13,7 +13,7 @@ function LoggedOut() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/" exact render={() => <Redirect to="/login" />} />
+        <Route path="*" exact render={() => <Redirect to="/login" />} />
       </Switch>
     </div>
   );

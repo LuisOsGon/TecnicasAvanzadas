@@ -1,5 +1,6 @@
 import http from "http";
 import cors from "cors";
+import morgan from "morgan";
 import express from "express";
 import { Server } from "socket.io";
 
@@ -19,6 +20,7 @@ const startApp = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cors());
+  app.use(morgan("dev"));
 
   app.use("/api", api);
 

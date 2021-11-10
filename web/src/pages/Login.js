@@ -6,7 +6,6 @@ import AuthService from "../services/auth";
 
 function Login() {
   const { login } = useAuth();
-  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
   const {
@@ -17,7 +16,6 @@ function Login() {
 
   const onSubmit = async ({ email, password }) => {
     setError(null);
-    setLoading(true);
 
     try {
       const {
@@ -29,7 +27,6 @@ function Login() {
       if (err?.response?.data?.message) {
         setError(err.response.data.message);
       }
-      setLoading(false);
     }
   };
 
@@ -61,7 +58,7 @@ function Login() {
           )}
         </p>
 
-        <input type="submit" className="btn-class"/>
+        <input type="submit" className="btn-class" />
       </form>
     </div>
   );

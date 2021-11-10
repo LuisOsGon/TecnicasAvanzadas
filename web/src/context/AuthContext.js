@@ -20,7 +20,7 @@ function AuthProvider({ children }) {
   const login = async (token) => {
     setLoading(true);
     localStorage.setItem("jwt", token);
-    fetchUser(token);
+    await fetchUser(token);
   };
 
   const logout = () => {
