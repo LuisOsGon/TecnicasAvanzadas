@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useAuth } from "../context/AuthContext";
+
 import { useChat } from "../context/ChatContext";
 import RoomsService from "../services/rooms";
 
@@ -28,7 +28,6 @@ function Messages({ roomId }) {
   const { socket } = useChat();
   const [messages, setMessages] = React.useState([]);
   const scrollRef = useRef();
-  const { user } = useAuth();
 
   const fetchMessages = () => {
     RoomsService.fetchMessages(roomId).then(({ data: { messages } }) => {
@@ -38,10 +37,15 @@ function Messages({ roomId }) {
 
   useEffect(() => {
     fetchMessages();
+    socket.emit("join", roomId);
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
-  }, []);
+
+    return () => {
+      socket.emit("leave", roomId);
+    };
+  }, [roomId]);
 
   useEffect(() => {
     scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);

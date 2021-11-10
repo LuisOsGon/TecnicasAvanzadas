@@ -5,6 +5,16 @@ function WebSocketEvents(socket) {
   try {
     console.log("Usuario conectado", socket.id);
 
+    socket.on("join", room => {
+      console.log("Usuario se ha unido a la sala", room);
+      socket.join(room);
+    });
+
+    socket.on("leave", room => {
+      console.log("Usuario se ha desconectado de la sala", room);
+      socket.leave(room);
+    });
+
     socket.on('message', async (data) => {
       const message = await Message.create({
         content: data.content,
@@ -15,7 +25,7 @@ function WebSocketEvents(socket) {
       await Message.populate(message, { path: 'user_id', model: User });
 
       socket.emit('message', message);
-      socket.broadcast.emit('message', message);
+      socket.to(data.room_id).emit('message', message);
     });
   } catch (error) {
     console.warn(error);
