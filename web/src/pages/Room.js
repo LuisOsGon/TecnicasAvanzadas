@@ -1,4 +1,3 @@
-import io from "socket.io-client";
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import RoomInfo from "../components/RoomInfo";
@@ -19,18 +18,9 @@ function Room() {
     setRoom(room);
   };
 
-  const connectToRoom = () => {
-    const socket = io(`http://localhost:8000`);
-    socket.on("connect", () => {});
-    socket.on("message", (message) => {
-      console.log(message);
-    });
-  };
-
   useEffect(() => {
     setRoom(null);
     fetchRoom();
-    connectToRoom();
   }, [roomId]);
 
   const loading = room == null;

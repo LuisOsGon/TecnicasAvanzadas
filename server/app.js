@@ -5,6 +5,7 @@ import express from "express";
 import { Server } from "socket.io";
 
 import api from "./src/routes";
+import WebSocketEvents from "./src/events";
 import connectDB from "./src/utils/db";
 
 const PORT = process.env.PORT || 8000;
@@ -28,17 +29,7 @@ const startApp = async () => {
 
   app.use("/api", api);
 
-  io.on("connection", (socket) => {
-    console.log("Usuario conectado", socket.id);
-    socket.on('mensaje', (data) => {
-        console.log(data);
-        io.sockets.emit('mensaje', data);
-    });
-    socket.on('typing', (data) => {
-        console.log(data);
-        socket.broadcast.emit('typing', data);
-    })
-  });
+  io.on("connection", WebSocketEvents);
 
   io.on('disconnect', (socket) => {
     console.log('a user disconnected');
