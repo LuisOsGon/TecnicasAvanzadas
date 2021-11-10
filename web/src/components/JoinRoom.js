@@ -6,9 +6,9 @@ function CreateRoom() {
   const [availableRooms, setAvailableRooms] = useState([]);
 
   useEffect(() => {
-    RoomsService.fetchAvailableRooms().then((rooms) => {
-      setAvailableRooms(rooms);
-    });
+    // RoomsService.fetchAvailableRooms().then((rooms) => {
+    //   setAvailableRooms(rooms);
+    // });
   }, []);
 
   return (
