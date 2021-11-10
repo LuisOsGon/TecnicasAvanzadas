@@ -12,7 +12,13 @@ function Navigation() {
     RoomsService.fetchRooms()
       .then((response) => {
         const { rooms } = response.data;
-
+        console.log(
+          "**************************************************************************\n\n\n"
+        );
+        console.log(rooms);
+        console.log(
+          "\n\n\n**************************************************************************"
+        );
         setRooms(rooms);
       })
       .catch((err) => console.warn(err));

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ChatInputBox() {
+function ChatInputBox({ name }) {
   return (
     <form
       onSubmit={(event) => {
@@ -14,7 +14,7 @@ function ChatInputBox() {
         name="message"
         type="text"
         className="ChatInput"
-        placeholder="Mensaje #general"
+        placeholder={`Mensaje #${name}`}
       />
     </form>
   );

@@ -1,18 +1,22 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Room from "../pages/Room";
+import { Switch, Route } from "react-router-dom";
+import { ChatProvider } from "../context/ChatContext";
 
+import Room from "../pages/Room";
 import Navigation from "./Navigation";
 
 function AuthenticatedRoutes() {
   return (
     <div className="App">
-      <Navigation />
-      <Switch>
-        <Route path="/room/:roomId">
-          <Room />
-        </Route>
-      </Switch>
+      <ChatProvider>
+        <Navigation />
+        <Switch>
+          <Route path="/room/:roomId">
+            <Room />
+          </Route>
+          <Route path="*" render={() => <h1>Bienvenido</h1>} />
+        </Switch>
+      </ChatProvider>
     </div>
   );
 }

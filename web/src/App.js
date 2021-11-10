@@ -9,7 +9,7 @@ function App() {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
 
   return isAuthenticated ? <AuthenticatedRoutes /> : <LoggedOut />;

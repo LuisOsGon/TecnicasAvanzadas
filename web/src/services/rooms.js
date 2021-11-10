@@ -12,6 +12,14 @@ class RoomsService {
       }
     });
   }
+
+  static async fetchRoom(id) {
+    return await client.get(`/rooms/${id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      }
+    });
+  }
 }
 
 export default RoomsService;

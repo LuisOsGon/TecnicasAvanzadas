@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function RoomInfo() {
+function RoomInfo({ name, description }) {
   return (
     <div className="RoomInfo">
       <div className="Topic">
-        Topico: <input className="TopicInput" value="charlar de todo un poco" />
+        Topico: <span className="TopicInput">{description}</span>
       </div>
-      <div className="RoomName">#general</div>
+      <div className="RoomName">#{name}</div>
     </div>
   );
 }

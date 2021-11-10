@@ -13,7 +13,11 @@ const startApp = async () => {
   const app = express();
   const server = http.createServer(app);
 
-  const io = new Server(server);
+  const io = new Server(server, {
+    cors: {
+      origin: "*",
+    }
+  });
 
   await connectDB(process.env.DB_URL);
 
@@ -38,6 +42,10 @@ const startApp = async () => {
 
   io.on('disconnect', (socket) => {
     console.log('a user disconnected');
+  });
+
+  io.on('error', (error) => {
+    console.log(error);
   });
 
   server.listen(PORT, () => {
