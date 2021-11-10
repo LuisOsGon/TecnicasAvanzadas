@@ -1,9 +1,11 @@
 import Room from '../models/room';
+import User from '../models/user';
 import Message from '../models/message';
 
 class RoomController {
   static async list(req, res) {
     const rooms = await Room.find({ members: req.user._id });
+
 
     return res.status(200).json({rooms});
   }
@@ -11,11 +13,13 @@ class RoomController {
   static async show(req, res) {
     const room = await Room.findById(req.params.roomId);
 
+    await Room.populate(room, { path: 'members', model: User });
+
     if (!room) {
       return res.status(404).json({ message: 'Room not found' });
     }
 
-    if (!room.members.includes(req.user._id)) {
+    if (!room.members.find(member => member._id.toString() === req.user._id.toString())) {
       return res.status(409).json({
         message: 'You are not in this room',
       });

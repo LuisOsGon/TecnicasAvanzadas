@@ -36,7 +36,7 @@ function Room() {
             <Messages roomId={roomId} />
             <ChatInputBox name={room.name} />
           </div>
-          <Members />
+          <Members members={room.members} />
         </>
       )}
     </div>
