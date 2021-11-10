@@ -171,12 +171,25 @@ body {
 .ChatInput {
   box-sizing: border-box;
   font: inherit;
-  width: 100%;
+  width: 80%;
   padding: 8px;
   border: solid 2px;
   border-color: #aaa;
   border-radius: 6px;
   outline: none;
+}
+
+.ChatBtn {
+	box-sizing: border-box;
+  font: inherit;
+  width: 15%;
+  padding: 8px;
+	margin-left: 10px;
+	margin-top: 40px;
+  border: solid 2px;
+  border-color: #aaa;
+  border-radius: 6px;
+	background-color: gold;
 }
 
 .ChatInput:focus {

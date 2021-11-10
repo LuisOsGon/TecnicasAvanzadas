@@ -29,6 +29,7 @@ function ChatInputBox({ name }) {
         placeholder={`Mensaje #${name}`}
         disabled={!connected}
       />
+      <input type="submit" className="ChatBtn"/>
     </form>
   );
 }
