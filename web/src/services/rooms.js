@@ -36,6 +36,18 @@ class RoomsService {
       }
     });
   }
+
+  static async leaveRoom(id) {
+    return await client.post(
+      `/rooms/${id}/leave`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt")
+        }
+      }
+    );
+  }
 }
 
 export default RoomsService;
