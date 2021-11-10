@@ -27,6 +27,7 @@ function Navigation() {
         />
         <div>
           <div>{user.email}</div>
+          <div>{user.username}</div>
           <div>
             <button onClick={logout} className="text-button">
               Desconectarse
