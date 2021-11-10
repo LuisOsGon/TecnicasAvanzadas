@@ -4,11 +4,14 @@ import JsonWebToken from '../utils/jwt';
 
 class AuthController {
     static async login(req, res) {
+      console.log('**************************************************************************\n\n\n')
+      console.log(req.body)
+      console.log('\n\n\n**************************************************************************')
       const { email, password } = req.body;
 
-      const user = await User.findOne({ email});
+      const user = await User.findOne({ email, password: await Hash.make(password)});
 
-      if (!user || ! await Hash.compare(password, user.password)) {
+      if (!user) {
           return res.status(401).json({ message: 'Credenciales inválidas' });
       }
 

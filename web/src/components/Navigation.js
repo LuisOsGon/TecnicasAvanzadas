@@ -35,6 +35,7 @@ function Navigation() {
         </div>
       </div>
       <nav className="RoomNav">
+        <Link to="/lobby">Ir al lobby</Link>
         {rooms.length > 0
           ? rooms.map((room) => (
               <Link key={room._id} to={`/room/${room._id}`}>

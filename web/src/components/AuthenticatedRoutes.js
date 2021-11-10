@@ -1,9 +1,10 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { ChatProvider } from "../context/ChatContext";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import Room from "../pages/Room";
+import Lobby from "../pages/Lobby";
 import Navigation from "./Navigation";
+import { ChatProvider } from "../context/ChatContext";
 
 function AuthenticatedRoutes() {
   return (
@@ -14,7 +15,10 @@ function AuthenticatedRoutes() {
           <Route path="/room/:roomId">
             <Room />
           </Route>
-          <Route path="*" render={() => <h1>Bienvenido</h1>} />
+          <Route path="/lobby">
+            <Lobby />
+          </Route>
+          <Route path="*" exact render={() => <Redirect to="/lobby" />} />
         </Switch>
       </ChatProvider>
     </div>
