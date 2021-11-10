@@ -49,15 +49,7 @@ function Messages({ roomId }) {
 
   return (
     <div ref={scrollRef} className="Messages">
-      <div className="EndOfMessages">
-        <strong>Todos los mensajes leídos</strong>
-      </div>
       <div>
-        <div className="Day">
-          <div className="DayLine" />
-          <div className="DayText">06/11/2021</div>
-          <div className="DayLine" />
-        </div>
         {messages.length > 0 &&
           messages.map((message, index) => {
             const previous = messages[index - 1];

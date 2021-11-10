@@ -37,6 +37,14 @@ class RoomsService {
     });
   }
 
+  static async fetchAvailableRooms() {
+    return await client.get("/rooms/available", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      }
+    });
+  }
+
   static async leaveRoom(id) {
     return await client.post(
       `/rooms/${id}/leave`,

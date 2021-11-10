@@ -20,10 +20,11 @@ class AuthService {
     });
   }
 
-  static async register({ email, password }) {
+  static async register({ email, username, password }) {
     return await client.post("/register", {
       email,
-      password
+      password,
+      username
     });
   }
 }

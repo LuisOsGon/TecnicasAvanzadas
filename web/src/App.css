@@ -321,5 +321,5 @@ body {
 
 .LobbyRoomJoin {
   width: 50%;
-  background-color: pink;
+  border-left: 1px solid #ccc;
 }
