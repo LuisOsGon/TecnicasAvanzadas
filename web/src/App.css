@@ -25,6 +25,14 @@ body {
   flex-direction: column;
 }
 
+.NavRooms {
+  background: #fff;
+  color: #454545;;
+  width: 225px;
+  display: flex;
+  flex-direction: column;
+}
+
 .Nav + * {
   display: flex;
   flex: 1;
@@ -284,4 +292,14 @@ body {
   width: 80px;
   background-color: gold;
   border-radius: 10px;
+}
+
+.divColumns {
+	font: inherit;
+  width: 50%;
+  padding: 8px;
+  border: solid 2px;
+  border-color: #aaa;
+  border-radius: 6px;
+  outline: none;
 }
