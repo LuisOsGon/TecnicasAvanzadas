@@ -35,13 +35,8 @@ function ChatProvider({ children }) {
 
   useEffect(() => {
     fetchRooms();
+    connectToRoom();
   }, []);
-
-  useEffect(() => {
-    if (roomId) {
-      connectToRoom();
-    }
-  }, [roomId]);
 
   return (
     <Provider
