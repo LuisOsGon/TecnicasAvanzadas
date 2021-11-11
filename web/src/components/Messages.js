@@ -57,7 +57,6 @@ function Messages({ roomId }) {
         {messages.length > 0 &&
           messages.map((message, index) => {
             const previous = messages[index - 1];
-            const showDay = false;
             const showName = shouldShowName(previous, message);
 
             return showName ? (
